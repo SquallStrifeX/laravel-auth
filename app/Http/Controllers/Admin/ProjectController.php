@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Http\Requests\StoreProjectRequest;
+use App\Http\Requests\UpdateProjectRequest;
 
 class ProjectController extends Controller
 {
@@ -54,7 +56,7 @@ class ProjectController extends Controller
 public function show(Project $project) // Qui stiamo utilizzando il Route Model Binding
 {
     // Non è più necessario usare Project::findOrFail($id), poiché Laravel inietterà automaticamente il progetto
-    return view('projects.show', compact('projects'));
+    return view('projects.show', compact('project'));
 }
 
 

@@ -24,7 +24,7 @@
                 <td>{{ $project->date_start }}</td>
                 <td>{{ $project->date_end ?? 'Non definita' }}</td>
                 <td>
-                    <a href="{{ route('admin.projects.show', $project->slug) }}" class="btn btn-info">Visualizza</a>
+                    <a href="{{ route('admin.projects.show', ['project' => $project->slug]) }}">Visualizza</a>
 
                 </td>
             </tr>

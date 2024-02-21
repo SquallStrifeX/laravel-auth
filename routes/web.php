@@ -29,8 +29,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::resource('projects', ProjectController::class);
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    Route::resource('projects', \App\Http\Controllers\Admin\ProjectController::class);
 });
 
 
