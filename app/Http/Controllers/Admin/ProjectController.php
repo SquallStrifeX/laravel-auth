@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Project;
 
 class ProjectController extends Controller
 {
@@ -14,8 +15,13 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        // Recupera tutti i progetti dal database
+        $projects = \App\Models\Project::all();
+
+        // Passa i progetti alla vista dell'admin
+        return view('projects.index', compact('projects'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -44,10 +50,13 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
+
+public function show(Project $project) // Qui stiamo utilizzando il Route Model Binding
+{
+    // Non è più necessario usare Project::findOrFail($id), poiché Laravel inietterà automaticamente il progetto
+    return view('projects.show', compact('projects'));
+}
+
 
     /**
      * Show the form for editing the specified resource.
