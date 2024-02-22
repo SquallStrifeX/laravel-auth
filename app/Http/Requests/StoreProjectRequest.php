@@ -8,17 +8,20 @@ class StoreProjectRequest extends FormRequest
 {
     public function authorize()
     {
-        // Qui puoi inserire la logica per determinare se l'utente è autorizzato a fare questa richiesta.
-        // Per ora, restituiamo true per consentire a chiunque di creare un progetto.
+        // Autorizza tutti gli utenti a fare questa richiesta.
         return true;
     }
 
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255', // Esempio: il nome del progetto è obbligatorio e deve essere una stringa
-            'description' => 'required|string', // Esempio: la descrizione è obbligatoria e deve essere una stringa
-            // Aggiungi altre regole di validazione necessarie per i tuoi campi del progetto
+            'name' => 'required|string|max:255|unique:projects,name', // Nome unico nel database
+            'description' => 'required|string|max:65535', // Descrizione del progetto
+            'repository_link' => 'nullable|url|max:255', // Link al repository, opzionale, deve essere un URL valido
+            'date_start' => 'required|date', // Data di inizio, deve essere una data valida
+            'date_end' => 'nullable|date|after_or_equal:date_start', // Data di fine, opzionale, deve essere dopo o uguale alla data di inizio
+            'img' => 'nullable|image|max:2048', // Immagine del progetto, opzionale, deve essere un'immagine valida e meno di 2MB
+            'slug' => 'required|string|max:255|unique:projects,slug' // Slug unico nel database
         ];
     }
 }

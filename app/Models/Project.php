@@ -14,12 +14,9 @@ public function getRouteKeyName()
     return 'slug'; // Assicurati che 'slug' sia il campo che intendi usare per il Route Model Binding.
 }
 protected $fillable = [
-    'name',
-    'description',
-    'date_start',
-    'date_end',
-    // Aggiungi qui altri attributi che vuoi rendere sicuri per l'assegnazione di massa
+    'name', 'description', 'repository_link', 'date_start', 'date_end', 'img', 'slug'
 ];
+
 }
 
 

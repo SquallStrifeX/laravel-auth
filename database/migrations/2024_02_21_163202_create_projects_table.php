@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 150)->unique();
             $table->text('description');
-            $table->string('repository_link')->unique();
+            $table->string('repository_link')->default('https://dan.com/buy-domain/deckow.com?redirected=true');
             $table->date('date_start');
             $table->date('date_end')->nullable();
             $table->string('img')->nullable();
