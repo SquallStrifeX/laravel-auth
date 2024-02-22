@@ -10,87 +10,42 @@ use App\Http\Requests\UpdateProjectRequest;
 
 class ProjectController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        // Recupera tutti i progetti dal database
-        $projects = \App\Models\Project::all();
-
-        // Passa i progetti alla vista dell'admin
+        $projects = Project::all();
         return view('projects.index', compact('projects'));
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('projects.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
-        //
+        $project = Project::create($request->validated());
+        return redirect()->route('projects.index')->with('success', 'Progetto creato con successo.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-
-public function show(Project $project) // Qui stiamo utilizzando il Route Model Binding
-{
-    // Non è più necessario usare Project::findOrFail($id), poiché Laravel inietterà automaticamente il progetto
-    return view('projects.show', compact('project'));
-}
-
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function show(Project $project)
     {
-        //
+        return view('projects.show', compact('project'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function edit(Project $project)
     {
-        //
+        return view('projects.edit', compact('project'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $project->update($request->validated());
+        return redirect()->route('admin.projects.index')->with('success', 'Progetto aggiornato con successo.');
+    }
+
+    public function destroy(Project $project)
+    {
+        $project->delete();
+        return redirect()->route('admin.projects.index')->with('success', 'Progetto eliminato con successo.');
     }
 }
