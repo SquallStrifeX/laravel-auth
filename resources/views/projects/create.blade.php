@@ -28,6 +28,7 @@
             <label for="repository_link">Link al Repository</label>
             <input type="text" class="form-control" id="repository_link" name="repository_link" placeholder="Inserisci il link al repository" value="{{ old('repository_link') }}">
         </div>
+        </div>
         <div class="form-group">
             <label for="date_start">Data Inizio</label>
             <input type="date" class="form-control" id="date_start" name="date_start" required value="{{ old('date_start') }}">
